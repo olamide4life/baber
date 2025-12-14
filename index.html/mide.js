@@ -152,174 +152,71 @@ document.getElementById('bookingForm').addEventListener('submit', (e) => {
 // ---------------------------
 // Robust gallery interaction: tap-to-expand, touch-drag scroll, mouse-drag scroll.
 // Replace previous gallery JS with this.
-
 document.addEventListener("DOMContentLoaded", () => {
   const gallery = document.getElementById("gallery");
-  const items = Array.from(document.querySelectorAll(".gallery .item"));
-  const rightArrow = document.querySelector(".gallery-arrow.right");
+  const items = document.querySelectorAll(".gallery .item");
 
-  // dragging state
-  let isDragging = false;
-  let dragStartX = 0;
-  let dragStartY = 0;
-  let dragScrollLeft = 0;
-  let lastDragTime = 0;
-  let movedDuringPointer = false;
+  let startX = 0;
+  let startY = 0;
+  let isTouch = false;
+  let moved = false;
 
-  // touch tap detection
-  const TAP_MOVE_THRESHOLD = 12; // px; movement <= this considered a tap
-  const TAP_TIME_THRESHOLD = 300; // ms; quick tap
+  const TAP_THRESHOLD = 10; // px
 
-  // ---------- MOUSE (desktop) dragging + click suppression ----------
-  let mouseDown = false;
-  let mouseStartX = 0;
-  let mouseScrollLeft = 0;
-  let mouseMoved = false;
-  let lastMouseDragEnd = 0;
-
-  gallery.addEventListener("mousedown", (e) => {
-    mouseDown = true;
-    mouseMoved = false;
-    mouseStartX = e.pageX;
-    mouseScrollLeft = gallery.scrollLeft;
-    // prevent image drag ghost
-    if (e.target && e.target.tagName === "IMG") e.preventDefault();
-  });
-
-  document.addEventListener("mousemove", (e) => {
-    if (!mouseDown) return;
-    const x = e.pageX;
-    const walk = (x - mouseStartX) * 1.2; // multiplier for speed
-    if (Math.abs(walk) > 3) mouseMoved = true;
-    gallery.scrollLeft = mouseScrollLeft - walk;
-  });
-
-  document.addEventListener("mouseup", () => {
-    if (mouseDown && mouseMoved) {
-      lastMouseDragEnd = Date.now();
-    }
-    mouseDown = false;
-    mouseMoved = false;
-  });
-
-  // suppress click right after a drag (desktop)
+  // ----- TOUCH (Mobile) -----
   items.forEach(item => {
-    item.addEventListener("click", (e) => {
-      // If user dragged recently, ignore click
-      if (Date.now() - lastMouseDragEnd < 250) {
-        e.stopPropagation();
-        e.preventDefault();
-        return;
+
+    item.addEventListener("touchstart", (e) => {
+      isTouch = true;
+      moved = false;
+
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    item.addEventListener("touchmove", (e) => {
+      const dx = Math.abs(e.touches[0].clientX - startX);
+      const dy = Math.abs(e.touches[0].clientY - startY);
+
+      if (dx > TAP_THRESHOLD || dy > TAP_THRESHOLD) {
+        moved = true; // user is swiping
       }
-      // Normal click behavior: expand that item
-      items.forEach(i => i.classList.remove("active"));
-      item.classList.add("active");
-      const closeBtn = item.querySelector(".close-btn");
-      if (closeBtn) closeBtn.style.display = "block";
+    }, { passive: true });
+
+    item.addEventListener("touchend", () => {
+      if (!moved) {
+        expandItem(item);
+      }
+      isTouch = false;
     });
-  });
 
-  // ---------- TOUCH (mobile) handlers: detect tap vs swipe ----------
-  gallery.addEventListener("touchstart", (e) => {
-    if (!e.touches || !e.touches[0]) return;
-    isDragging = true;
-    movedDuringPointer = false;
-    dragStartX = e.touches[0].pageX;
-    dragStartY = e.touches[0].pageY;
-    dragScrollLeft = gallery.scrollLeft;
-    lastDragTime = Date.now();
-  }, { passive: true });
-
-  gallery.addEventListener("touchmove", (e) => {
-    if (!isDragging) return;
-    const touch = e.touches[0];
-    const dx = touch.pageX - dragStartX;
-    const dy = touch.pageY - dragStartY;
-
-    // if user moves more than threshold we treat as scroll
-    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
-      movedDuringPointer = true;
-    }
-
-    // perform horizontal scroll only if horizontal movement dominates
-    if (Math.abs(dx) > Math.abs(dy)) {
-      // prevent vertical bounce while dragging horizontally
-      e.preventDefault && e.preventDefault();
-      gallery.scrollLeft = dragScrollLeft - (dx * 1.2);
-    }
-  }, { passive: false });
-
-  gallery.addEventListener("touchend", (e) => {
-    // If there was little movement and quickly released => treat as tap
-    const touchTime = Date.now() - lastDragTime;
-    if (!movedDuringPointer && touchTime < TAP_TIME_THRESHOLD) {
-      // find where the finger ended and which item is under it
-      const touch = (e.changedTouches && e.changedTouches[0]) || null;
-      if (touch) {
-        const el = document.elementFromPoint(touch.clientX, touch.clientY);
-        const item = el ? el.closest(".item") : null;
-        if (item) {
-          // activate the tapped item
-          items.forEach(i => i.classList.remove("active"));
-          item.classList.add("active");
-          const closeBtn = item.querySelector(".close-btn");
-          if (closeBtn) closeBtn.style.display = "block";
-          // ensure the item is visible/centered
-          item.scrollIntoView({ behavior: "smooth", inline: "center" });
-        }
+    // ----- DESKTOP CLICK -----
+    item.addEventListener("click", () => {
+      if (!isTouch) {
+        expandItem(item);
       }
-    }
-    isDragging = false;
-    movedDuringPointer = false;
-  }, { passive: true });
+    });
 
-  // ---------- Close buttons (touch + click) ----------
-  items.forEach(item => {
+    // Close button
     const closeBtn = item.querySelector(".close-btn");
-    if (!closeBtn) return;
-    // handle both click and touch
-    closeBtn.addEventListener("click", (ev) => {
-      ev.stopPropagation();
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
       item.classList.remove("active");
-      closeBtn.style.display = "none";
     });
-    closeBtn.addEventListener("touchstart", (ev) => {
-      ev.stopPropagation();
-      ev.preventDefault();
+
+    closeBtn.addEventListener("touchstart", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
       item.classList.remove("active");
-      closeBtn.style.display = "none";
-    }, { passive: false });
+    });
   });
 
-  // ---------- Right arrow scroll (click only) ----------
-  if (rightArrow) {
-    rightArrow.addEventListener("click", () => {
-      // if an item is active, move to next item; otherwise scroll forward
-      const activeIndex = items.findIndex(it => it.classList.contains("active"));
-      if (activeIndex >= 0 && activeIndex < items.length - 1) {
-        items[activeIndex].classList.remove("active");
-        items[activeIndex + 1].classList.add("active");
-        items[activeIndex + 1].scrollIntoView({ behavior: "smooth", inline: "center" });
-      } else {
-        // just scroll the container right
-        gallery.scrollBy({ left: gallery.clientWidth * 0.6, behavior: "smooth" });
-      }
-    });
+  function expandItem(item) {
+    items.forEach(i => i.classList.remove("active"));
+    item.classList.add("active");
   }
-
-  // ---------- Accessibility: keyboard expand (optional) ----------
-  items.forEach(item => {
-    item.setAttribute("tabindex", "0");
-    item.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        items.forEach(i => i.classList.remove("active"));
-        item.classList.add("active");
-      }
-    });
-  });
-
 });
+
 
 
 // ---------------------------
@@ -434,3 +331,4 @@ closeBtn.addEventListener("touchstart", closeAbout);
 renderServices();
 populateBookingForm();
 renderTestimonials();
+
