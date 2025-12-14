@@ -604,6 +604,14 @@
   .item.active img {
     transform: scale(1);
   }
+ /* When one item is active, control all flex sizes */
+.gallery.has-active .item {
+  flex: 0 0 10%;
+}
+
+.gallery.has-active .item.active {
+  flex: 3;
+}
 
   /* Numbers on panels */
   .item-number {
@@ -1203,4 +1211,4 @@
                 padding: 2rem 1.5rem;
             }
         }
-
+    
