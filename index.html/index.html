@@ -8,6 +8,7 @@
     <meta property="og:description" content="Your style, our expertise. Book your cut today.">
     <meta property="og:type" content="website">
     <title>The Gentleman's Cut - Premium Barber Salon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -40,15 +41,20 @@
         </nav>
     </header>
 
-    <section id="home" class="hero">
-       
-        <div class="hero-logo">✂️</div>
-        <div class="hero-content">
-            <h1>CUT. SHAVE. STYLE.</h1>
-            <p>Your style, my expertise. Book your cut today.</p>
-            <a href="#booking" class="cta-button">Book Appointment</a>
-        </div>
-    </section>
+   <section id="home" class="hero">
+  <div class="hero-logo-ring">
+    <div class="hero-logo-circle">
+      <img src="clipper.jpg" alt="The Gentleman's Cut Logo">
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <h1>CUT. SHAVE. STYLE.</h1>
+    <p>Your style, my expertise. Book your cut today.</p>
+    <a href="#booking" class="cta-button">Book Appointment</a>
+  </div>
+</section>
+
 
     <section id="services">
         <h2 class="section-title">My Services</h2>
@@ -97,7 +103,12 @@
       
     </div>
 
-
+        <div class="item">
+      <span class="item-number">6</span>
+      <img src="https://picsum.photos/600/800?4" alt="Haircut 4">
+      <div class="title">Haircut 6</div>
+      
+    </div>
 
   </div>
 </div>
@@ -127,76 +138,77 @@
 </section>
 
            
-    <section id="booking">
-        <h2 class="section-title">Book Your Appointment</h2>
-        <form class="booking-form" id="bookingForm">
-            <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required>
-                <span class="error-message" id="nameError">Please enter your name</span>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required>
-                <span class="error-message" id="phoneError">Please enter a valid phone number</span>
-            </div>
-            <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required>
-                <span class="error-message" id="emailError">Please enter a valid email</span>
-            </div>
-            <div class="form-group">
-                <label for="service">Service *</label>
-                <select id="service" name="service" required>
-                    <option value="">Select a service</option>
-                </select>
-                <span class="error-message" id="serviceError">Please select a service</span>
-            </div>
-            <div class="form-group">
-                <label for="date">Preferred Date *</label>
-                <input type="date" id="date" name="date" required>
-                <span class="error-message" id="dateError">Please select a date</span>
-            </div>
-            <div class="form-group">
-                <label for="time">Preferred Time *</label>
-                <select id="time" name="time" required>
-                    <option value="">Select a time</option>
-                    <option value="08:00">08:00 AM</option>
-                    <option value="08:30">08:30 AM</option>
-                    <option value="09:00">09:00 AM</option>
-                    <option value="09:30">09:30 AM</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="10:30">10:30 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="11:30">11:30 AM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="12:30">12:30 PM</option>
-                    <option value="13:00">01:00 PM</option>
-                    <option value="13:30">01:30 PM</option>
-                    <option value="14:00">02:00 PM</option>
-                    <option value="14:30">02:30 PM</option>
-                    <option value="15:00">03:00 PM</option>
-                    <option value="15:30">03:30 PM</option>
-                    <option value="16:00">04:00 PM</option>
-                    <option value="16:30">04:30 PM</option>
-                    <option value="17:00">05:00 PM</option>
-                    <option value="17:30">05:30 PM</option>
-                    <option value="18:00">06:00 PM</option>
-                    <option value="18:30">06:30 PM</option>
-                    <option value="19:00">07:00 PM</option>
-                    <option value="19:30">07:30 PM</option>
-                    <option value="20:00">08:00 PM</option>
-                    <option value="20:30">08:30 PM</option>
-                    <option value="21:00">09:00 PM</option>
-                </select>
-                <span class="error-message" id="timeError">Please select a time</span>
-            </div>
-            <button type="submit" class="cta-button">Confirm Booking</button>
-            <div class="success-message" id="successMessage">
-                ✓ Appointment booked successfully! I'll contact you shortly to confirm.
-            </div>
-        </form>
-    </section>
+<section id="booking">
+  <h2 class="section-title">Book Your Appointment</h2>
+  <form class="booking-form" id="bookingForm" autocomplete="on">
+    
+    <div class="form-group">
+      <label for="name">Full Name *</label>
+      <input type="text" id="name" name="name" required autocomplete="name">
+      <span class="error-message" id="nameError">Please enter your name</span>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel">
+      <span class="error-message" id="phoneError">Please enter a valid phone number</span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required autocomplete="email">
+      <span class="error-message" id="emailError">Please enter a valid email</span>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Preferred Date *</label>
+      <input type="date" id="date" name="date" required>
+      <span class="error-message" id="dateError">Please select a date</span>
+    </div>
+
+    <div class="form-group">
+      <label for="time">Preferred Time *</label>
+      <select id="time" name="time" required>
+        <option value="">Select a time</option>
+        <option value="08:00">08:00 AM</option>
+        <option value="08:30">08:30 AM</option>
+        <option value="09:00">09:00 AM</option>
+        <option value="09:30">09:30 AM</option>
+        <option value="10:00">10:00 AM</option>
+        <option value="10:30">10:30 AM</option>
+        <option value="11:00">11:00 AM</option>
+        <option value="11:30">11:30 AM</option>
+        <option value="12:00">12:00 PM</option>
+        <option value="12:30">12:30 PM</option>
+        <option value="13:00">01:00 PM</option>
+        <option value="13:30">01:30 PM</option>
+        <option value="14:00">02:00 PM</option>
+        <option value="14:30">02:30 PM</option>
+        <option value="15:00">03:00 PM</option>
+        <option value="15:30">03:30 PM</option>
+        <option value="16:00">04:00 PM</option>
+        <option value="16:30">04:30 PM</option>
+        <option value="17:00">05:00 PM</option>
+        <option value="17:30">05:30 PM</option>
+        <option value="18:00">06:00 PM</option>
+        <option value="18:30">06:30 PM</option>
+        <option value="19:00">07:00 PM</option>
+        <option value="19:30">07:30 PM</option>
+        <option value="20:00">08:00 PM</option>
+        <option value="20:30">08:30 PM</option>
+        <option value="21:00">09:00 PM</option>
+      </select>
+      <span class="error-message" id="timeError">Please select a time</span>
+    </div>
+
+    <button type="submit" class="cta-button">Confirm Booking</button>
+
+    <div class="success-message" id="successMessage">
+      ✓ Appointment booked successfully! I'll contact you shortly to confirm.
+    </div>
+  </form>
+</section>
+
 
     <section id="testimonials">
         <h2 class="section-title">What My Clients Say</h2>
@@ -212,11 +224,11 @@
             <div class="contact-info">
                 <div class="info-item">
                     <h3>📍 Address</h3>
-                    <p>123 Main Street<br>Downtown District<br>New York, NY 10001</p>
+                    <p>123 Olamide Street<br>Olamide Downtow<br>Lagos, NG 10001</p>
                 </div>
                 <div class="info-item">
                     <h3>📞 Phone</h3>
-                    <p>(555) 123-4567</p>
+                    <p>(+234) 916-280-9649</p>
                 </div>
                 <div class="info-item">
                     <h3>✉️ Email</h3>
@@ -244,24 +256,39 @@
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <h3>Stay Connected</h3>
-            <div class="social-links">
-                <a href="https://instagram.com" target="_blank" aria-label="Instagram">📷</a>
-                <a href="https://facebook.com" target="_blank" aria-label="Facebook">📘</a>
-                <a href="https://twitter.com" target="_blank" aria-label="Twitter">🐦</a>
-            </div>
-            <div class="newsletter">
-                <input type="email" placeholder="Enter your email" id="newsletterEmail">
-                <button onclick="subscribeNewsletter()">Subscribe</button>
-            </div>
-            <p>&copy; 2025 The Gentleman's Cut. All rights reserved.</p>
-        </div>
-    </footer>
+<footer>
+  <div class="footer-content">
+    <h3>Stay Connected</h3>
+    <div class="social-links">
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </div>
+
+    <div class="newsletter">
+      <input type="email" placeholder="Enter your email" id="newsletterEmail">
+      <button onclick="subscribeNewsletter()">Subscribe</button>
+    </div>
+
+    <p>&copy; 2025 The Gentleman's Cut. All rights reserved.</p>
+
+    <!-- Created by Olamide Raul -->
+    <div class="designer-footer">
+      <a href="https://wa.me/234912809649" target="_blank" class="designer-name">Design by Olamide Raul</a>
+      <div class="designer-line"></div>
+    </div>
+  </div>
+</footer>
+
+
 
     
 <script src="mide.js"></script>
 </body>
 </html>
-
