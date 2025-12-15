@@ -150,8 +150,8 @@ document.getElementById('bookingForm').addEventListener('submit', (e) => {
 // ---------------------------
 // Horizontal Gallery
 // ---------------------------
-// Robust gallery interaction: tap-to-expand, touch-drag scroll, mouse-drag scroll.
-// Replace previous gallery JS with this.
+// Horizontal Gallery (FIXED — no page jump)
+// ---------------------------
 document.addEventListener("DOMContentLoaded", () => {
   const gallery = document.getElementById("gallery");
   const items = Array.from(gallery.querySelectorAll(".item"));
@@ -160,9 +160,26 @@ document.addEventListener("DOMContentLoaded", () => {
   let startX = 0;
   let startY = 0;
 
+  // helper → center item horizontally ONLY
+  function centerItemHorizontally(container, item) {
+    const containerRect = container.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+
+    const scrollLeft =
+      container.scrollLeft +
+      (itemRect.left - containerRect.left) -
+      (containerRect.width / 2) +
+      (itemRect.width / 2);
+
+    container.scrollTo({
+      left: scrollLeft,
+      behavior: "smooth"
+    });
+  }
+
   items.forEach(item => {
 
-    // detect touch start
+    // touch start
     item.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
@@ -176,36 +193,35 @@ document.addEventListener("DOMContentLoaded", () => {
       if (dx > 8 || dy > 8) isSwiping = true;
     }, { passive: true });
 
-    // tap = expand
-    item.addEventListener("touchend", () => {
+    // tap = expand (NO vertical scroll)
+    item.addEventListener("touchend", (e) => {
       if (isSwiping) return;
 
+      e.preventDefault();
+
       items.forEach(i => i.classList.remove("active"));
       item.classList.add("active");
 
       gallery.classList.add("has-active");
 
-      item.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest"
-      });
+      // 🔥 horizontal centering only
+      centerItemHorizontally(gallery, item);
     });
-  });
 
-  // Desktop click (unchanged behavior)
-  items.forEach(item => {
-    item.addEventListener("click", () => {
+    // desktop click support
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
+
       items.forEach(i => i.classList.remove("active"));
       item.classList.add("active");
+
       gallery.classList.add("has-active");
 
-      item.scrollIntoView({
-        behavior: "smooth",
-        inline: "center"
-      });
+      centerItemHorizontally(gallery, item);
     });
   });
+});
+
 
   // Close button
   items.forEach(item => {
@@ -225,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gallery.classList.remove("has-active");
     }, { passive: false });
   });
-});
+
 
 
 // ---------------------------
@@ -340,3 +356,4 @@ closeBtn.addEventListener("touchstart", closeAbout);
 renderServices();
 populateBookingForm();
 renderTestimonials();
+
