@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium barbershop offering expert cuts, shaves, and grooming services. Book your appointment online today.">
+    <meta property="og:title" content="The Gentleman's Cut - Premium Barber Salon">
+    <meta property="og:description" content="Your style, our expertise. Book your cut today.">
+    <meta property="og:type" content="website">
+    <title>The Gentleman's Cut - Premium Barber Salon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function(){
+    emailjs.init("R7x04Q3z8a-mm2nzt"); // Replace with your EmailJS public key
+  })();
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="logo">ASHIWAJU CUT</a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#booking">Book Now</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    
+                </ul>
+            </div>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <span id="themeIcon">🌙</span>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+   <section id="home" class="hero">
+  <div class="hero-logo-ring">
+    <div class="hero-logo-circle">
+      <img src="clipper.jpg" alt="The Gentleman's Cut Logo">
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <h1>CUT. SHAVE. STYLE.</h1>
+    <p>Your style, my expertise. Book your cut today.</p>
+    <a href="#booking" class="cta-button">Book Appointment</a>
+  </div>
+</section>
+
+
+
+    <section id="services">
+        <h2 class="section-title">My Services</h2>
+        <div class="service-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="men">Men</button>
+            <button class="filter-btn" data-filter="women">Women</button>
+            <button class="filter-btn" data-filter="kids">Kids</button>
+        </div>
+        <div class="services-grid" id="servicesGrid"></div>
+    </section>
+
+<section id="gallery-section">
+ <h2 class="section-title">Gallery</h2>
+
+<div class="gallery-container">
+ 
+  <div class="gallery" id="gallery">
+    <div class="item">
+      <span class="item-number">1</span>
+      <img src="salon4.jpg" alt="Haircut 1">
+      <div class="title">Haircut 1</div>
+    </div>
+    <div class="item">
+      <span class="item-number">2</span>
+      <img src="style1.jpg" alt="Haircut 2">
+      <div class="title">Haircut 2</div>
+    </div>
+    <div class="item">
+      <span class="item-number">3</span>
+      <img src="style2.jpg" alt="Haircut 3">
+      <div class="title">Haircut 3</div>
+     
+    </div>
+    <div class="item">
+      <span class="item-number">4</span>
+      <img src="slaon3.jpg" alt="Haircut 4">
+      <div class="title">Haircut 4</div>
+      
+    </div>
+
+  </div>
+</div>
+
+</section>
+
+   <section id="about">
+  <h2 class="section-title">About Me</h2>
+  <div class="about-container">
+    <!-- Circle image + short write-up -->
+    <div class="about-circle" id="aboutCircle">
+      <img src="https://picsum.photos/200/200" alt="Barber">
+      <p>Welcome to The Gentleman's Cut! Click to learn more.</p>
+    </div>
+
+    <!-- Expanded rectangle -->
+    <div class="about-expanded" id="aboutExpanded">
+      <span class="close-expanded" id="closeExpanded">&times;</span>
+      <img src="https://picsum.photos/300/300" alt="Barber Expanded">
+      <div class="expanded-text">
+        <p>Welcome to  <span class="ashiwaju-color">Ashiwaju</span> Cut! I'm a passionate barber with over 10 years of experience in classic and modern grooming. My mission is to provide every client with a premium, personalized experience.</p>
+        <p>Whether you're looking for a sharp business cut, stylish fade, or traditional hot shave, I take pride in delivering exceptional results that exceed expectations.</p>
+        <p>Step into my chair and experience the difference that expertise, attention to detail, and genuine care can make.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+           
+<section id="booking">
+  <h2 class="section-title">Book Your Appointment</h2>
+  <form class="booking-form" id="bookingForm" autocomplete="on">
+    
+    <div class="form-group">
+      <label for="name">Full Name *</label>
+      <input type="text" id="name" name="name" required autocomplete="name">
+      <span class="error-message" id="nameError">Please enter your name</span>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel">
+      <span class="error-message" id="phoneError">Please enter a valid phone number</span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required autocomplete="email">
+      <span class="error-message" id="emailError">Please enter a valid email</span>
+    </div>
+
+    <div class="form-group">
+  <label for="service">Select Service *</label>
+  <select id="service" name="service" required>
+    <option value="">Select a service</option>
+  </select>
+  <span class="error-message" id="serviceError">Please select a service</span>
+</div>
+
+
+    <div class="form-group">
+      <label for="date">Preferred Date *</label>
+      <input type="date" id="date" name="date" required>
+      <span class="error-message" id="dateError">Please select a date</span>
+    </div>
+
+    <div class="form-group">
+      <label for="time">Preferred Time *</label>
+      <select id="time" name="time" required>
+        <option value="">Select a time</option>
+        <option value="08:00">08:00 AM</option>
+        <option value="08:30">08:30 AM</option>
+        <option value="09:00">09:00 AM</option>
+        <option value="09:30">09:30 AM</option>
+        <option value="10:00">10:00 AM</option>
+        <option value="10:30">10:30 AM</option>
+        <option value="11:00">11:00 AM</option>
+        <option value="11:30">11:30 AM</option>
+        <option value="12:00">12:00 PM</option>
+        <option value="12:30">12:30 PM</option>
+        <option value="13:00">01:00 PM</option>
+        <option value="13:30">01:30 PM</option>
+        <option value="14:00">02:00 PM</option>
+        <option value="14:30">02:30 PM</option>
+        <option value="15:00">03:00 PM</option>
+        <option value="15:30">03:30 PM</option>
+        <option value="16:00">04:00 PM</option>
+        <option value="16:30">04:30 PM</option>
+        <option value="17:00">05:00 PM</option>
+        <option value="17:30">05:30 PM</option>
+        <option value="18:00">06:00 PM</option>
+        <option value="18:30">06:30 PM</option>
+        <option value="19:00">07:00 PM</option>
+        <option value="19:30">07:30 PM</option>
+        <option value="20:00">08:00 PM</option>
+        <option value="20:30">08:30 PM</option>
+        <option value="21:00">09:00 PM</option>
+      </select>
+      <span class="error-message" id="timeError">Please select a time</span>
+    </div>
+
+
+    <button type="submit" class="cta-button">Confirm Booking</button>
+
+    <div class="success-message" id="successMessage">
+      ✓ Appointment booked successfully! I'll contact you shortly to confirm.
+    </div>
+  </form>
+</section>
+
+
+    <section id="testimonials">
+        <h2 class="section-title">What My Clients Say</h2>
+        <div class="testimonials-slider">
+            <div id="testimonialsContainer"></div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <h3>📍 Address</h3>
+                    <p>123 Olamide Street<br>Olamide Downtow<br>Lagos, NG 10001</p>
+                </div>
+                <div class="info-item">
+                    <h3>📞 Phone</h3>
+                    <p>(+234) 916-280-9649</p>
+                </div>
+                <div class="info-item">
+                    <h3>✉️ Email</h3>
+                    <p>info@ashiwajucut.com</p>
+                </div>
+                <div class="info-item">
+                    <h3>🕐 Opening Hours</h3>
+                    <table class="hours-table">
+                        <tr><td>Monday - Friday</td><td>9:00 AM - 8:00 PM</td></tr>
+                        <tr><td>Saturday</td><td>9:00 AM - 6:00 PM</td></tr>
+                        <tr><td>Sunday</td><td>10:00 AM - 4:00 PM</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s123%20Main%20St%2C%20New%20York%2C%20NY%2010001!5e0!3m2!1sen!2sus!4v1234567890"
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+<footer>
+  <div class="footer-content">
+    <h3>Stay Connected</h3>
+    <div class="social-links">
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </div>
+
+    <div class="newsletter">
+      <input type="email" placeholder="Enter your email" id="newsletterEmail">
+      <button onclick="subscribeNewsletter()">Subscribe</button>
+    </div>
+
+    <p>&copy; 2025 Ashiwaju Cut. All rights reserved.</p>
+
+    <!-- Created by Olamide Raul -->
+    <div class="designer-footer">
+      <a href="https://wa.me/2349162809649" target="_blank" class="designer-name">Design by Olamide Raul</a>
+      <div class="designer-line"></div>
+    </div>
+  </div>
+</footer>
+
+
+
+    
+<script src="mide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("YOUR_PUBLIC_KEY");
+</script>
+
+</body>
+</html>
